@@ -23,11 +23,11 @@
         //Return the choice
         return compChoices;
     }
-    // Get input from player
-    computerSelection = getComputerChoice();
-    playerSelection = prompt("Rock/Paper/Scissor?");
     // Create function to play a single round
     function playRound(playerSelection,computerSelection){
+        computerSelection = getComputerChoice();
+        // Get input from player
+        playerSelection = prompt("Rock/Paper/Scissor?");
         //Make the input case sensitive by lower it's case.
         playerSelectionSens = playerSelection.toLowerCase();
         //Combine
@@ -40,13 +40,35 @@
             case playerSelectionSens === "rock" && computerSelection === "scissor":
             case playerSelectionSens === "paper" && computerSelection === "rock":
             case playerSelectionSens === "scissor" && computerSelection === "paper":
-                return `You win! ${playerSelectionSens} > ${computerSelection} `;
+                return `You won! ${playerSelectionSens} > ${computerSelection} `;
                 break;
 
             default:
-                return `Sorry,you lose! ${playerSelectionSens} < ${computerSelection}`;
+                return `Sorry,you loss! ${playerSelectionSens} < ${computerSelection}`;
         }
     }
     // Create function to play 5 rounds in a row and return the final winner
+    function game(){
+        //Define score variable
+        let playerScore = 0;
+        //Loop 5 times
+        for(let i = 0; i < 5; i++){
+            computerSelection = getComputerChoice();
+            // Get input from player
+            playerSelection = prompt("Rock/Paper/Scissor?");
+            gameResult = playRound(playerSelection,computerSelection);
+            //Add/Sub the score base on win or lose
+            playerScore += gameResult[0] = "Y" ? 1 : gameResult[0] = "S" ? -1 : 0;
+        }
+        //Display the final winner of the game
+        if(playerScore > 0 ){
+            return `You won! Your score is ${playerScore}`;
+        }else if(playerScore === 0){
+            return `Tie! Your score is 0`;
+        }else{
+            return `Computer won! Your score is ${playerScore}`; 
+        }
+    }
+    console.log(game());
     </script>
 </html>
