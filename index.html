@@ -5,9 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/script.js">
 </head>
 <body>
-    
+    <h1>GAME</h1>
 </body>
+<script>
+    // Define variables for the game
+    let computerSelection;
+    let playerSelection;
+    // Create function to get computer's choice
+    function getComputerChoice(){
+        //Random index from 1 to 3 
+        let compIndex = Math.floor(Math.random() * 3);
+        //Assign each index with R/P/S
+        let choices = ["rock","paper","scissor"];
+        let compChoices = choices[compIndex];
+        //Return the choice
+        return compChoices;
+    }
+    // Get input from player
+    computerSelection = getComputerChoice();
+    playerSelection = prompt("Rock/Paper/Scissor?");
+    // Create function to play a single round
+    function playRound(playerSelection,computerSelection){
+        //Make the input case sensitive by lower it's case.
+        playerSelectionSens = playerSelection.toLowerCase();
+        //Combine
+            //Tie (Using if)
+        if(playerSelectionSens === computerSelection){
+            return "Tie!";
+        }
+            //Win or lose (Using switch)
+        switch(true){
+            case playerSelectionSens === "rock" && computerSelection === "scissor":
+            case playerSelectionSens === "paper" && computerSelection === "rock":
+            case playerSelectionSens === "scissor" && computerSelection === "paper":
+                return `You win! ${playerSelectionSens} > ${computerSelection} `;
+                break;
+
+            default:
+                return `Sorry,you lose! ${playerSelectionSens} < ${computerSelection}`;
+        }
+    }
+    // Create function to play 5 rounds in a row and return the final winner
+    </script>
 </html>
