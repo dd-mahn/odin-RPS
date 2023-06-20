@@ -53,22 +53,30 @@
         let playerScore = 0;
         //Loop 5 times
         for(let i = 0; i < 5; i++){
-            computerSelection = getComputerChoice();
-            // Get input from player
-            playerSelection = prompt("Rock/Paper/Scissor?");
             gameResult = playRound(playerSelection,computerSelection);
             //Add/Sub the score base on win or lose
-            playerScore += gameResult[0] = "Y" ? 1 : gameResult[0] = "S" ? -1 : 0;
+            // playerScore += gameResult[0] = "Y" ? 1 : gameResult[0] = "S" ? -1 : 0;
+            switch(true){
+                case gameResult[0] === "Y":
+                    playerScore += 1;
+                    break;
+                case gameResult[0] === "S":
+                    playerScore += -1;
+                    break;
+                case gameResult[0] === "T":
+                    playerScore += 0;
+                    break;
+            }
         }
         //Display the final winner of the game
         if(playerScore > 0 ){
-            return `You won! Your score is ${playerScore}`;
+            console.log(`You won! Your score is ${playerScore}`);
         }else if(playerScore === 0){
-            return `Tie! Your score is 0`;
+            console.log(`Tie! Your score is 0`);
         }else{
-            return `Computer won! Your score is ${playerScore}`; 
+            console.log(`Computer won! Your score is ${playerScore}`); 
         }
     }
-    console.log(game());
+    game();
     </script>
 </html>
