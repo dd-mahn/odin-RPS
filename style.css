@@ -1,0 +1,55 @@
+body{
+    margin:0;
+    width: auto;
+    height: auto;
+    background-color: black;
+    color: aliceblue;
+    font-size: 24px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.game-img{
+    width:30%;
+}
+.description,
+.note{
+    margin:0;
+}
+.play{
+    margin: 64px 0px 64px 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.play-buttons{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.play-icons{
+    font-size: 64px;
+    margin-bottom: 48px;
+}
+#play-btn{
+    color:aliceblue;
+    font-size: 20px;
+    background-color: #000;
+    border: 5px solid aliceblue;
+    border-radius: 25px;
+    padding:16px;
+    width: 70%;
+}
+#play-btn:hover{
+    background-color: rgba(240, 248, 255, 0.745);
+}
+.display{
+    border: 5px solid aliceblue;
+    border-radius: 25px;
+    width: 89.5%;
+    padding: 64px;
+    text-align: center;
+}
