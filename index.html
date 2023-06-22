@@ -4,15 +4,68 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://kit.fontawesome.com/345d5666fe.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+    <title>Rock Paper Scissor</title>
 </head>
 <body>
-    <h1>GAME</h1>
+    <h1 class="title">Rock Paper Scissor</h1>
+    <p class="description">Can you beat the Evil Machine?</p>
+    <img class="game-img" src="/images/RPS-2.jpeg" alt="">
+    <p class="note">Remember, you need to reach 5 points to save yourself, or you will be a part of the machine forever.</p>
+    <div class="play">
+        <div class="play-buttons">
+            <i class="play-icons fa-solid fa-hand-back-fist"></i>
+            <button id="play-btn">Rock</button>
+        </div>
+        <div class="play-buttons">
+            <i class="play-icons fa-solid fa-hand"></i>
+            <button id="play-btn">Paper</button>
+        </div>
+        <div class="play-buttons">
+            <i class="play-icons fa-solid fa-hand-scissors"></i>
+            <button id="play-btn">Scissor</button>
+        </div>
+    </div>
+    <div class="display">
+        <h3 class="score">Your score: </h3>
+        <h3 class="result"></h3>
+    </div>
+
 </body>
 <script>
     // Define variables for the game
+    
     let computerSelection;
-    let playerSelection;
+    let playerSelections = document.querySelectorAll('#play-btn');
+    let score = 0;
+    let scoreDisplay = document.querySelector('.score');
+    let result = document.querySelector('.result');
+
+    // Create function on click event to play the game
+    playerSelections.forEach(playerSelection => playerSelection.addEventListener('click',() => {
+        //reset result 
+        result.textContent = "";
+        //get player input and make it case sensitive
+        let playerSelectionTxt = playerSelection.textContent;
+        let playerSelectionSens = playerSelectionTxt.toLowerCase();
+        //play game and show result
+        result.textContent += playRound(playerSelectionSens);
+        //change and display score
+        score += result.textContent[0] === "Y" ? 1 : result.textContent[0] === "S" ? -1 : 0;
+        if(scoreDisplay.textContent.length == 12){
+            scoreDisplay.textContent += score;
+        }else if(scoreDisplay.textContent.length >= 12){
+            scoreDisplay.textContent = "Your score: ";
+            scoreDisplay.textContent += score;
+        }
+        //display when player win the game
+        if(score >= 5){
+            result.textContent = "Congrats! You defeated the evil machine!";
+        }
+    
+    }));
+
     // Create function to get computer's choice
     function getComputerChoice(){
         //Random index from 1 to 3 
@@ -23,17 +76,14 @@
         //Return the choice
         return compChoices;
     }
+
     // Create function to play a single round
-    function playRound(playerSelection,computerSelection){
+    function playRound(playerSelectionSens,computerSelection){
         computerSelection = getComputerChoice();
-        // Get input from player
-        playerSelection = prompt("Rock/Paper/Scissor?");
-        //Make the input case sensitive by lower it's case.
-        playerSelectionSens = playerSelection.toLowerCase();
         //Combine
             //Tie (Using if)
         if(playerSelectionSens === computerSelection){
-            return "Tie!";
+            return "It's a tie!";
         }
             //Win or lose (Using switch)
         switch(true){
@@ -44,39 +94,8 @@
                 break;
 
             default:
-                return `Sorry,you loss! ${playerSelectionSens} < ${computerSelection}`;
+                return `Sorry, you loss! ${playerSelectionSens} < ${computerSelection}`;
         }
     }
-    // Create function to play 5 rounds in a row and return the final winner
-    function game(){
-        //Define score variable
-        let playerScore = 0;
-        //Loop 5 times
-        for(let i = 0; i < 5; i++){
-            gameResult = playRound(playerSelection,computerSelection);
-            //Add/Sub the score base on win or lose
-            // playerScore += gameResult[0] = "Y" ? 1 : gameResult[0] = "S" ? -1 : 0;
-            switch(true){
-                case gameResult[0] === "Y":
-                    playerScore += 1;
-                    break;
-                case gameResult[0] === "S":
-                    playerScore += -1;
-                    break;
-                case gameResult[0] === "T":
-                    playerScore += 0;
-                    break;
-            }
-        }
-        //Display the final winner of the game
-        if(playerScore > 0 ){
-            console.log(`You won! Your score is ${playerScore}`);
-        }else if(playerScore === 0){
-            console.log(`Tie! Your score is 0`);
-        }else{
-            console.log(`Computer won! Your score is ${playerScore}`); 
-        }
-    }
-    game();
     </script>
 </html>
